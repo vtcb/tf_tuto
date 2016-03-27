@@ -35,9 +35,6 @@ def softmaxRegressionModel(x):
     W = tf.Variable(tf.zeros([784,10]))
     b = tf.Variable(tf.zeros([10]))
     
-    # Initialize variables
-    sess.run(tf.initialize_all_variables())
-    
     # Model Definition
     y = tf.nn.softmax(tf.matmul(x, W) + b)
     
@@ -49,6 +46,9 @@ def softmaxRegressionTrain(x, y, y_):
 
     # Train step
     train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
+    
+    # Initialize variables
+    sess.run(tf.initialize_all_variables())
     
     # Train 1000 times
     for i in range(1000):
@@ -136,7 +136,7 @@ def convNetTrain(x, y, y_, keep_prob):
                 feed_dict = {
                     x         : batch[0],
                     y_        : batch[1],
-                    keep_prob : 0.5
+                    keep_prob : 1.0
                 }
             )
 
